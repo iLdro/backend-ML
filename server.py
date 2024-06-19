@@ -2,6 +2,8 @@ import flask
 import joblib
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+from flask_cors import CORS
+
 CORS(app)  # Autoriser toutes les origines sans restriction
 
 
