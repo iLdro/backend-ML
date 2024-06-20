@@ -2,10 +2,12 @@ import flask
 import joblib
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-CORS(app)  # Autoriser toutes les origines sans restriction
+from flask_cors import CORS
+
 
 
 app = flask.Flask(__name__)
+CORS(app)  # Autoriser toutes les origines sans restriction
 
 # Charger le modèle et le scaler
 reg = joblib.load('random_forest_model.joblib')
@@ -23,7 +25,7 @@ def make_prediction():
     destinationAirport = flask.request.args.get('destinationAirport')
     segmentsAirlineName = flask.request.args.get('segmentsAirlineName')
     segmentsEquipmentDescription = flask.request.args.get('segmentsEquipmentDescription')
-    
+
     # Vérifier que tous les paramètres sont présents
     if not all([weekday, startingAirport, destinationAirport, segmentsAirlineName, segmentsEquipmentDescription]):
         return flask.jsonify({'error': 'Missing parameter(s)'}), 400
